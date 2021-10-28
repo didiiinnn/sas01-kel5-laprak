@@ -350,4 +350,4 @@ nano lxc_php5.6.dev
     - Karena skema website menggunakan beberapa sistem linux yang berbeda. Oleh karena itu, menggunakan virtualisasi LXC memudahkan untuk membuat server
 - apa yang dimaksud dengan proxy server? kenapa vm.local bisa kita anggap sebagai proxy server?
     - server proxy adalah aplikasi server yang bertindak sebagai perantara antara klien yang meminta sumber daya dan server yang menyediakan sumber daya itu.
-    - Dari kasus tersebut, vm.local sebagai server proxy dan halaman arahan web. Artinya vm.localis jembatan untuk menghubungkan internet
+    - Dari kasus tersebut, vm.local sebagai server proxy dan halaman arahan web. Artinya vm.local jembatan untuk menghubungkan internet
