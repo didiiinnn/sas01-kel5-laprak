@@ -126,10 +126,9 @@ ___
 - Masuk ke direktori sites-enabled pada nginx debian_php5.6 untuk membuat symlink ke sites-available/lxc_php5.6
     ```
     cd ../sites-enabled
-    ls default
+    ls
     ln -s /etc/nginx/sites-available/lxc_php5.6.dev
     ```
-  
 - Tes nginx dan restart service nginx
     ```
     nginx -t
@@ -151,7 +150,7 @@ ___
 - Masuk direktori var/www/html lalu buat folder baru bernama lxc_php5.6
     ```
     cd /var/www/html
-    ls index.nginx-debian.html
+    ls
     mkdir lxc_php5.6
     ```
 - Copy index.nginx-debian.html ke file baru di folder lxc_php5.6 dengan nama index.html
@@ -177,7 +176,9 @@ ___
 ### Soal 4. setup nginx pada ubuntu_landing untuk domain http://lxc_landing.dev , buat halaman index.html yang menerangkan informasi nama lxc
 - Keluar direktori debian_php5.6 lalu masuk direktori ubuntu_landing
     ```
-    kode
+    exit
+    sudo lxc-start -n ubuntu_landing
+    sudo lxc-attach -n ubuntu_landing
     ```
   
 - Masuk sites-available dan edit lxc_php5.6.dev
@@ -194,6 +195,7 @@ ___
 
 - Masuk direktori sites-enabled tampilkan isi dari folder dan symlink menggunakan:
     ```
+    cd ../sites-enabled
     ls -la
     ```
   
@@ -208,9 +210,11 @@ ___
 
   ![B1](asset/Picture28.png)
 
-- Masuk ke direktori html namun cek terlebih dahulu isi folder menggunakan:
+- Masuk ke direktori html selanjutnya cek terlebih dahulu isi folder 
     ```
+    cd /var/www/html
     ls
+    cd /var/www/html/lxc_php5.6/
     ```
     ![B1](asset/Picture29.png)
   
@@ -232,6 +236,7 @@ ___
 ### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
 - Keluar terlebih dahulu dari direktori lxc ubuntu_landing lalu stop service ubuntu landing
     ```
+    exit
     sudo lxc-stop -n ubuntu_landing
     ```
 - Cek service status ubuntu_landing menjadi stopped
@@ -244,13 +249,17 @@ ___
     ```
     sudo su
     cd /vsr/lib/lxc
+    ls
+    cd ubuntu_landing
+    ls
+    nano config
     ```
 
   ![B1](asset/Picture33.png)
   
 - Tambahkan kode autostart 1
     ```
-    kode
+    lxc.start.auto = 1
     ```
  
  ![B1](asset/Picture34.png)
@@ -284,7 +293,10 @@ ___
 - Ubah proxy_pass
   - mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev :
     ```
-    kode
+    location / {
+        rewrite /?(.*)$ /$1 break;
+        proxy_pass http://lxc_landing.dev;
+    }
     ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /
   
@@ -293,7 +305,10 @@ ___
   
   - mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev :
     ```
-    kode
+    location /blog {
+        rewrite /blog/?(.*)$ /$1 break;
+        proxy_pass http://lxc_php7.dev
+    }
     ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /blog
   
@@ -302,19 +317,23 @@ ___
   
   - mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev :
     ```
-    kode
+    location /app {
+        rewrite /app/?(.*)$ /$1 break;
+        proxy_pass http://lxc_php5.dev;
+    }
     ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /app
   
   
   proxy_pass diganti ke http://lxc_php5.dev
   
-  ![B1](asset/Picture38.png)
+  ![B1](asset/Picture38.jpeg)
 
 - Masuk sites-enabled reset nginx
   ```
   cd ../sites-enabled
-  ls -la
+  sudo nginx -t
+  sudo nginx -s reload
   ```
 
   ![B1](asset/Picture39.png)
@@ -350,7 +369,7 @@ ___
  - mengapa untuk kebutuhan php5.6 tidak bisa menggunakan ubuntu 16.04, sehingga perlu diganti os ke debian 9?
     - Karena Ubuntu 16.04 xenial sudah mencapai akhir versi dan tidak support untuk php 5.6 pada bulan april tahun 2021
 - kenapa harus menggunakan virtualisasi LXC pada skema website yang akan didevelop?
-    - Karena skema website menggunakan beberapa sistem linux yang berbeda. Oleh karena itu, menggunakan virtualisasi LXC memudahkan untuk membuat server
+    - Menggunakan virtualisasi LXC memudahkan untuk membuat server karena skema pada website menggunakan sistem linux yang berbeda-beda.
 - apa yang dimaksud dengan proxy server? kenapa vm.local bisa kita anggap sebagai proxy server?
-    - server proxy adalah aplikasi server yang bertindak sebagai perantara antara klien yang meminta sumber daya dan server yang menyediakan sumber daya itu.
-    - Dari kasus tersebut, vm.local sebagai server proxy dan halaman arahan web. Artinya vm.local jembatan untuk menghubungkan internet
+    - Server proxy adalah sebuah komputer server atau program komputer yang dapat bertindak sebagai komputer lainnya untuk melakukan request terhadap content dari Internet atau intranet. Pada umumnya proxy server digunakan untuk mengamankan jaringan komputer pribadi yang terhubung dengan jaringan publik. Jadi, dari proxy server tersebut maka biasanya server diletakkan di antara aplikasi server dengan aplikasi client, dimana aplikasi client berupa web browser, client FTP dan lainnya sedangkan aplikasi server berupa server FTP dan web server.
+    - Vm.local sebagai server proxy dan halaman arahan web. Artinya vm.local jembatan untuk menghubungkan internet.
