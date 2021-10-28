@@ -285,20 +285,26 @@ nano lxc_php5.6.dev
   kode
   ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /
+  
   proxy_pass diganti ke http://lxc_landing.dev
+  
   
   - mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev :
    ```
   kode
   ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /blog
+  
   proxy_pass diganti ke http://lxc_php7.dev
+  
   
   - mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev :
   ```
   kode
   ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /app
+  
+  
   proxy_pass diganti ke http://lxc_php5.dev
   
   ![B1](asset/Picture38.png)
