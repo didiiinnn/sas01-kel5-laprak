@@ -125,6 +125,10 @@ nano lxc_php5.6.dev
   ![B1](asset/Picture19.png)
 
 - Masuk ke direktori sites-enabled pada nginx debian_php5.6 untuk membuat symlink ke sites-available/lxc_php5.6
+  ```
+  kode
+  ```
+  
 - Tes nginx dan restart service nginx
   ```
   kode
@@ -132,17 +136,40 @@ nano lxc_php5.6.dev
 
   ![B1](asset/Picture20.png)
 
-- Setting hosts
+- Setting hosts dengan masuk ke direktori /etc/hosts
+  ```
+  kode
+  ```
+  
+- Tambahkan ip lxc_php5.dev sama seperti localhost yaitu 127.0.0.1
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture21.png)
 
-- Masuk var/www/html, copy, edit index di folder php5.6
-
+- Masuk direktori var/www/html
+  ```
+  kode
+  ```
+- Copy index.nginx-debian.html ke file baru di folder lxc_php5.6 dengan nama index.html
+  ```
+  kode
+  ```
+  
   ![B1](asset/Picture22.png)
-
+  
+- Edit index di folder lxc_php5.6 beri keterangan bahwa 'Halaman ini dari lxc_debian5.6' dan simpan
+  ```
+  kode
+  ```
+  
   ![B1](asset/Picture23.png)
 
-- Cek http lxc_php5.dev
+- Cek isi http lxc_php5.dev menggunakan curl dari localhost
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture24.png)
 
