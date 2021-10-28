@@ -28,10 +28,10 @@ ___
   ![B1](asset/Picture3.png)
 
 - Start service ubuntu_landing lalu attach ubuntu_landing
-  ```
+    ```
     sudo lxc-start -n ubuntu_landing
     sudo lxc-attach -n ubuntu_landing
-  ```  
+    ```  
 
   ![B1](asset/Picture4.png)
 
@@ -54,137 +54,138 @@ ___
     ```
     sudo nano /etc/apt/sources.list
     ```
-  ![B1](asset/Picture10.png)
+    ![B1](asset/Picture10.png)
   
 - Install lxc Debian 9
-  ```
-  sudo lxc-create -n debian_php5.5 -t download -- --dist debian --release stretch --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
-  ```
+    ```
+    sudo lxc-create -n debian_php5.5 -t download -- --dist debian --release stretch --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+    ```
 
   ![B1](asset/Picture11.png)
   
-  - Update debian_php5.6
+- Update debian_php5.6
 
   ![B1](asset/Picture13.png)
   
-  - Informasi debian release
+- Informasi debian release
 
   ![B1](asset/Picture14.png)
 
 ### Soal 3. setup nginx pada debian_php5.6 untuk domain http://lxc_php5.dev , buat halaman index.html yang menerangkan informasi nama lxc
 - Exit ubuntu landing
-  ```
-  Exit
-  ```
-  Start dan attach debian_php5.6 lalu install nginx dan nginx extra pada debian_php5.6
-  ```
-  sudo lxc-start -n debian_php5.6
-  sudo lxc-attach -n debian_php5.6
-  sudo apt install nginx nginx-extras
-  ```
-  ![B1](asset/Picture15.png)
+    ```
+    Exit
+    ```
+- Start dan attach debian_php5.6 lalu install nginx dan nginx extra pada debian_php5.6
+    ```
+    sudo lxc-start -n debian_php5.6
+    sudo lxc-attach -n debian_php5.6
+    sudo apt install nginx nginx-extras
+    ```
+    ![B1](asset/Picture15.png)
 
 - Install curl dan setting ip
-   ```
-  apt install nano net-tools curl
-  nano /etc/network/interfaces
-  ```
+    ```
+    apt install nano net-tools curl
+    nano /etc/network/interfaces
+    ```
 
-  ![B1](asset/Picture16.png)
+    ![B1](asset/Picture16.png)
 
-  ![B1](asset/Picture17.png)
+    ![B1](asset/Picture17.png)
   
-  Restart service networking
-  ```
-  systemctl restart networking.service
-  ```
-  Alternatif apabila tidak terganti IP nya :
-  ```
-  shutdown now
-  sudo lxc-start -n debian_php5.6
-  sudo lxc-attach -n debian_php5.6
-  ```
+- Restart service networking
+    ```
+    systemctl restart networking.service
+    ```
+- Alternatif apabila tidak terganti IP nya :
+    ```
+    shutdown now
+    sudo lxc-start -n debian_php5.6
+    sudo lxc-attach -n debian_php5.6
+    ```
   
-  Cek IP apakah sudah ganti ataukah belum menggunakan ifconfig
-
-  ![B1](asset/Picture18.png)
+- Cek IP apakah sudah ganti ataukah belum menggunakan ifconfig
+    
+    ![B1](asset/Picture18.png)
   
 - Masuk ke direktori sites-available pada nginx debian_php5.6
-```
-cd /etc/nginx/sites-available
-```
+    ```
+    cd /etc/nginx/sites-available
+    ```
 - Buat file baru bernama lxc_php5.6.dev
-```
-touch lxc_php5.6.dev
-```
+    ```
+    touch lxc_php5.6.dev
+    ```
 - Edit lxc_php5.6
-```
-nano lxc_php5.6.dev
-```
-
-  ![B1](asset/Picture19.png)
+    ```
+    nano lxc_php5.6.dev
+    ```
+    ![B1](asset/Picture19.png)
 
 - Masuk ke direktori sites-enabled pada nginx debian_php5.6 untuk membuat symlink ke sites-available/lxc_php5.6
-  ```
-  kode
-  ```
+    ```
+    cd ../sites-enabled
+    ls default
+    ln -s /etc/nginx/sites-available/lxc_php5.6.dev
+    ```
   
 - Tes nginx dan restart service nginx
-  ```
-  kode
-  ```
-
-  ![B1](asset/Picture20.png)
+    ```
+    nginx -t
+    nginx -s reload
+    ```
+    ![B1](asset/Picture20.png)
 
 - Setting hosts dengan masuk ke direktori /etc/hosts
-  ```
-  kode
-  ```
+    ```
+    nano /etc/hosts
+    ```
   
 - Tambahkan ip lxc_php5.dev sama seperti localhost yaitu 127.0.0.1
-  ```
-  kode
-  ```
-
-  ![B1](asset/Picture21.png)
+    ```
+    127.0.0.1   lxc_php5.dev
+    ```
+    ![B1](asset/Picture21.png)
 
 - Masuk direktori var/www/html lalu buat folder baru bernama lxc_php5.6
-  ```
-  kode
-  ```
+    ```
+    cd /var/www/html
+    ls index.nginx-debian.html
+    mkdir lxc_php5.6
+    ```
 - Copy index.nginx-debian.html ke file baru di folder lxc_php5.6 dengan nama index.html
-  ```
-  kode
-  ```
-  
-  ![B1](asset/Picture22.png)
+    ```
+    cp index.nginx-debian.html lxc_php5.6/index.html lxc_php5.6/index.html
+    cd /var/www/html/lxc_php5.6
+    ```
+    ![B1](asset/Picture22.png)
   
 - Edit index di folder lxc_php5.6 beri keterangan bahwa 'Halaman ini dari lxc_debian5.6' dan simpan
-  ```
-  kode
-  ```
-  
-  ![B1](asset/Picture23.png)
+    ```
+    nano index.html
+    ```
+    ![B1](asset/Picture23.png)
 
 - Cek isi http lxc_php5.dev menggunakan curl dari localhost lxc debian_php5.6
-  ```
-  kode
-  ```
+    ```
+    curl -i http://lxc_php5.dev
+    ```
 
   ![B1](asset/Picture24.png)
 
 ### Soal 4. setup nginx pada ubuntu_landing untuk domain http://lxc_landing.dev , buat halaman index.html yang menerangkan informasi nama lxc
 - Keluar direktori debian_php5.6 lalu masuk direktori ubuntu_landing
-  ```
-  kode
-  ```
+    ```
+    kode
+    ```
   
 - Masuk sites-available dan edit lxc_php5.6.dev
-  ```
-  kode
-  ```
-
-  ![B1](asset/Picture25.png)
+    ```
+    cd ../sites-available
+    nano lxc_php5.6.dev
+    ```
+    ![B1](asset/Picture25.png)
 
 - Edit server name di sites-available/lxc_php5.6.dev menjadi lxc_landing.dev
   Server name adalah nama server yang nantinya akan dipanggil
@@ -192,73 +193,72 @@ nano lxc_php5.6.dev
   ![B1](asset/Picture26.png)
 
 - Masuk direktori sites-enabled tampilkan isi dari folder dan symlink menggunakan:
-  ```
-  ls -la
-  ```
+    ```
+    ls -la
+    ```
   
 - Tes nginx dan reload nginx
-  ```
-  kode
-  ```
-  
-  ![B1](asset/Picture27.png)
+    ```
+    nginx -t
+    nginx -s reload
+    ```
+    ![B1](asset/Picture27.png)
   
 - Setting hosts dengan masuk ke direktori /etc/hosts lalu ubah ip server name menjadi 127.0.0.1 lxc_landing.dev
 
   ![B1](asset/Picture28.png)
 
 - Masuk ke direktori html namun cek terlebih dahulu isi folder menggunakan:
-  ```
-  ls
-  ```
-  
-  ![B1](asset/Picture29.png)
+    ```
+    ls
+    ```
+    ![B1](asset/Picture29.png)
   
   Diketahui sudah ada folder bernama lxc_php5.6 sebelumnya lalu masuk ke direktori folder tersebut dan edit fie index.html didalamnya
-  ```
-  nano index.html
-  ```
+    ```
+    nano index.html
+    ```
 
 - Ubah isi index.html menjadi informasi nama lxc 'Halaman ini dari lxc ubuntu_landing'
 
   ![B1](asset/Picture30.png)
 
 - Cek isi (http://lxc_landing.dev) pada localhost lxc ubuntu_landing menggunakan curl
-  ```
-  kode
-  ```
-
-  ![B1](asset/Picture31.png)
+    ```
+    curl -i http://lxc_landing.dev
+    ```
+    ![B1](asset/Picture31.png)
 
 ### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
 - Keluar terlebih dahulu dari direktori lxc ubuntu_landing lalu stop service ubuntu landing
-  ```
-  kode
-  ```
-  Cek service status ubuntu_landing menjadi stopped
-  ```
-  lxc-ls -f
-  ``
+    ```
+    sudo lxc-stop -n ubuntu_landing
+    ```
+- Cek service status ubuntu_landing menjadi stopped
+    ```
+    lxc-ls -f
+    ```
   ![B1](asset/Picture32.png)
 
 - Masuk root lalu ke direktori /var/lib/lxc dan masuk ke direktori ubuntu_landing/config
-  ```
-  kode
-  ```
+    ```
+    sudo su
+    cd /vsr/lib/lxc
+    ```
 
   ![B1](asset/Picture33.png)
   
 - Tambahkan kode autostart 1
-  ```
-  kode
-  ```
+    ```
+    kode
+    ```
  
  ![B1](asset/Picture34.png)
 
 - Cek apakah sudah benar autostart menjadi 1
-  ```
-  lxc-ls -f
-  ```
+    ```
+    lxc-ls -f
+    ```
 
   ![B1](asset/Picture35.png)
 
@@ -273,35 +273,37 @@ nano lxc_php5.6.dev
   ![B1](asset/Picture36.png)
 
 - Edit vm.local di sites-available
-  ```
-  kode
-  ```
+    ```
+    cd /etc/nginx/sites-available
+    ls
+    sudo nano vm.local
+    ```
 
   ![B1](asset/Picture37.png)
   
 - Ubah proxy_pass
   - mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev :
-  ```
-  kode
-  ```
+    ```
+    kode
+    ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /
   
   proxy_pass diganti ke http://lxc_landing.dev
   
   
   - mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev :
-   ```
-  kode
-  ```
+    ```
+    kode
+    ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /blog
   
   proxy_pass diganti ke http://lxc_php7.dev
   
   
   - mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev :
-  ```
-  kode
-  ```
+    ```
+    kode
+    ```
   Fungsi rewrite ialah untuk menghapus bagian belakang dari /app
   
   
@@ -311,7 +313,8 @@ nano lxc_php5.6.dev
 
 - Masuk sites-enabled reset nginx
   ```
-  kode
+  cd ../sites-enabled
+  ls -la
   ```
 
   ![B1](asset/Picture39.png)
