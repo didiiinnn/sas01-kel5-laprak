@@ -148,7 +148,7 @@ nano lxc_php5.6.dev
 
   ![B1](asset/Picture21.png)
 
-- Masuk direktori var/www/html
+- Masuk direktori var/www/html lalu buat folder baru bernama lxc_php5.6
   ```
   kode
   ```
@@ -174,20 +174,36 @@ nano lxc_php5.6.dev
   ![B1](asset/Picture24.png)
 
 ### Soal 4. setup nginx pada ubuntu_landing untuk domain http://lxc_landing.dev , buat halaman index.html yang menerangkan informasi nama lxc
-- Masuk direktori ubuntu landing
-- Masuk sites-available edit lxc_php5.6.dev
+- Keluar direktori debian_php5.6 lalu masuk direktori ubuntu_landing
+  ```
+  kode
+  ```
+  
+- Masuk sites-available dan edit lxc_php5.6.dev
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture25.png)
 
-- Edit server name di sites-available php5.6.dev
+- Edit server name di sites-available/lxc_php5.6.dev menjadi lxc_landing.dev
+  Server name adalah nama server yang nantinya akan dipanggil
 
   ![B1](asset/Picture26.png)
 
-- Tes nginx di sites-enabled dan reload nginx edit hosts
-
+- Masuk direktori sites-enabled tampilkan isi dari folder dan symlink menggunakan:
+  ```
+  ls -la
+  ```
+  
+- Tes nginx dan reload nginx
+  ```
+  kode
+  ```
+  
   ![B1](asset/Picture27.png)
-
-- Ubah ip hosts lxc landing
+  
+- Setting hosts dengan masuk ke direktori /etc/hosts lalu ubah ip server name menjadi 127.0.0.1 lxc_landing.dev
 
   ![B1](asset/Picture28.png)
 
