@@ -1,12 +1,12 @@
 # Laporan Praktikum 1 - Sistem Administrasi Server 
 Disusun oleh :
-  Chintya Tribhuana Utami (1202190041)
-  Nur Wulan Maudini (1202190002)
+1. Chintya Tribhuana Utami (1202190041)
+2. Nur Wulan Maudini (1202190002)
 
 
 # ______________________________________
 
-Praktikum dikerjakan berdasarkan skema yang tertera di soal dan soal dapat diakses [Klikdisini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-1/soal_praktikum.md)
+Praktikum dikerjakan berdasarkan skema yang tertera di soal dan soal dapat diakses [Klik Disini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-1/soal_praktikum.md)
 #  ______________________________________
 Pada pelaksanaan pengerjaan soal praktikum , kita melakukan perubahan dengan keadaan awal latihan soal praktikum sebelumnya dengan soal praktikum yang sudah diberikan kali ini.
 #
@@ -20,7 +20,8 @@ ___
     ![B1](asset/Picture1.png)
 
 - Stop service ubuntu_php5.6 sebelum rename
-![B1](asset/Picture2.png)
+![B1]
+(asset/Picture2.png)
 
 - Rename lxc
 ![B1](asset/Picture3.png)
