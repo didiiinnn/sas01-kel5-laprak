@@ -1,33 +1,31 @@
-# Laporan Praktikum 1 - Sistem Administrasi Server 
-Disusun oleh :
+# Practical Report 1 - Server Administration System
+Arranged by :
 1. Chintya Tribhuana Utami (1202190041)
 2. Nur Wulan Maudini (1202190002)
 
-
-# ______________________________________
-
-Praktikum dikerjakan berdasarkan skema yang tertera di soal dan soal dapat diakses [Klik Disini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-1/soal_praktikum.md)
-#  ______________________________________
-Pada pelaksanaan pengerjaan soal praktikum , kita melakukan perubahan dengan keadaan awal latihan soal praktikum sebelumnya dengan soal praktikum yang sudah diberikan kali ini.
-#
-#
-### Soal 1. Rename ubuntu_php5.6 menjadi ubuntu_landing, serta rubah IP mengikuti skema yang baru
+##### ______________________________________
+The practicum is carried out based on the scheme listed in the questions and the questions can be accessed [Click here.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-1/soal_praktikum.md)
+##### ______________________________________
+In the implementation of working on practical questions, we make changes to the initial state of the previous practice questions with the practical questions that have been given this time.
+##### ______________________________________
+######
+######
+### Number 1. Rename ubuntu_php5.6 to ubuntu_landing, and change the IP following the new scheme
 ___
-- Menampilkan list LXC untuk mengecek nama LXC sebelum direname
+- Show the LXC before rename the LXC
     ```
     sudo lxc -ls -f
     ```  
     ![B1](asset/Picture1.png)
 
-- Stop terlebih dahulu service pada ubuntu_php5.6
+- First stop the service on ubuntu_php5.6
 
   ![B1](asset/Picture2.png)
 
-- Ubah nama ubuntu_php5.6 menjadi ubuntu_landing
-
+- Rename ubuntu_php5.6 to ubuntu_landing
   ![B1](asset/Picture3.png)
 
-- Start service ubuntu_landing lalu attach ubuntu_landing
+- Start service ubuntu_landing and then attach ubuntu_landing
     ```
     sudo lxc-start -n ubuntu_landing
     sudo lxc-attach -n ubuntu_landing
@@ -35,28 +33,28 @@ ___
 
   ![B1](asset/Picture4.png)
 
-- Ganti IP pada LXC ubuntu_landing menjadi 10.0.3.103
+- Change IP on LXC ubuntu_landing to 10.0.3.103
 
   ![B1](asset/Picture5.png)
 
   ![B1](asset/Picture6.png)
 
-### Soal 2. Install lxc debian 9 dengan nama debian_php5.6
-- Cek setting IP di virtual machine
+### Number 2. Install lxc debian 9 with the name debian_php5.6
+- Check IP settings on the virtual machine
 
   ![B1](asset/Picture7.png)
 
-- Cek apakah bisa tersambung ke internet
+- Check if you can connect to the internet
 
   ![B1](asset/Picture8.png)
 
-- Tambahkan kode berikut pada sources list ubuntu
+- Add the following code to the ubuntu sources list
     ```
     sudo nano /etc/apt/sources.list
     ```
     ![B1](asset/Picture10.png)
   
-- Install lxc Debian 9
+- Install LXC Debian 9
     ```
     sudo lxc-create -n debian_php5.5 -t download -- --dist debian --release stretch --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
     ```
@@ -67,16 +65,16 @@ ___
 
   ![B1](asset/Picture13.png)
   
-- Informasi debian release
+- Debian release information
 
   ![B1](asset/Picture14.png)
 
-### Soal 3. setup nginx pada debian_php5.6 untuk domain http://lxc_php5.dev , buat halaman index.html yang menerangkan informasi nama lxc
+### Number 3. setup nginx on debian_php5.6 for the domain http://lxc_php5.dev, create an index.html page that explains the lxc name information
 - Exit ubuntu landing
     ```
     Exit
     ```
-- Start dan attach debian_php5.6 lalu install nginx dan nginx extra pada debian_php5.6
+- Start and attach debian_php5.6 then install nginx and nginx extra on debian_php5.6
     ```
     sudo lxc-start -n debian_php5.6
     sudo lxc-attach -n debian_php5.6
@@ -84,7 +82,7 @@ ___
     ```
     ![B1](asset/Picture15.png)
 
-- Install curl dan setting ip
+- Install curl and ip settings
     ```
     apt install nano net-tools curl
     nano /etc/network/interfaces
@@ -98,22 +96,22 @@ ___
     ```
     systemctl restart networking.service
     ```
-- Alternatif apabila tidak terganti IP nya :
+- Alternative if the IP is not changed:
     ```
     shutdown now
     sudo lxc-start -n debian_php5.6
     sudo lxc-attach -n debian_php5.6
     ```
   
-- Cek IP apakah sudah ganti ataukah belum menggunakan ifconfig
+- Check the IP whether it has changed or not using ifconfig
     
     ![B1](asset/Picture18.png)
   
-- Masuk ke direktori sites-available pada nginx debian_php5.6
+- Go to sites-available directory on nginx debian_php5.6
     ```
     cd /etc/nginx/sites-available
     ```
-- Buat file baru bernama lxc_php5.6.dev
+- Create a new file named lxc_php5.6.dev
     ```
     touch lxc_php5.6.dev
     ```
@@ -123,94 +121,94 @@ ___
     ```
     ![B1](asset/Picture19.png)
 
-- Masuk ke direktori sites-enabled pada nginx debian_php5.6 untuk membuat symlink ke sites-available/lxc_php5.6
+- Go to the sites-enabled directory on nginx debian_php5.6 to create a symlink to sites-available/lxc_php5.6
     ```
     cd ../sites-enabled
     ls
     ln -s /etc/nginx/sites-available/lxc_php5.6.dev
     ```
-- Tes nginx dan restart service nginx
+- Test nginx and restart the nginx service
     ```
     nginx -t
     nginx -s reload
     ```
     ![B1](asset/Picture20.png)
 
-- Setting hosts dengan masuk ke direktori /etc/hosts
+- Setting hosts by going to the /etc/hosts directory
     ```
     nano /etc/hosts
     ```
   
-- Tambahkan ip lxc_php5.dev sama seperti localhost yaitu 127.0.0.1
+- Add ip lxc_php5.dev same as localhost which is 127.0.0.1
     ```
     127.0.0.1   lxc_php5.dev
     ```
     ![B1](asset/Picture21.png)
 
-- Masuk direktori var/www/html lalu buat folder baru bernama lxc_php5.6
+- Go to the var/www/html directory then create a new folder called lxc_php5.6
     ```
     cd /var/www/html
     ls
     mkdir lxc_php5.6
     ```
-- Copy index.nginx-debian.html ke file baru di folder lxc_php5.6 dengan nama index.html
+- Copy index.nginx-debian.html to a new file in the lxc_php5.6 folder with the name index.html
     ```
     cp index.nginx-debian.html lxc_php5.6/index.html lxc_php5.6/index.html
     cd /var/www/html/lxc_php5.6
     ```
     ![B1](asset/Picture22.png)
   
-- Edit index di folder lxc_php5.6 beri keterangan bahwa 'Halaman ini dari lxc_debian5.6' dan simpan
+- Edit the index in the lxc_php5.6 folder stating that 'This page is from lxc_debian5.6' and save
     ```
     nano index.html
     ```
     ![B1](asset/Picture23.png)
 
-- Cek isi http lxc_php5.dev menggunakan curl dari localhost lxc debian_php5.6
+- Check the contents of http lxc_php5.dev using curl from localhost lxc debian_php5.6
     ```
     curl -i http://lxc_php5.dev
     ```
 
   ![B1](asset/Picture24.png)
 
-### Soal 4. setup nginx pada ubuntu_landing untuk domain http://lxc_landing.dev , buat halaman index.html yang menerangkan informasi nama lxc
-- Keluar direktori debian_php5.6 lalu masuk direktori ubuntu_landing
+### Number 4. setup nginx on ubuntu_landing for the http://lxc_landing.dev domain, create an index.html page that describes the lxc name information
+- Exit the debian_php5.6 directory and then enter the ubuntu_landing directory
     ```
     exit
     sudo lxc-start -n ubuntu_landing
     sudo lxc-attach -n ubuntu_landing
     ```
   
-- Masuk sites-available dan edit lxc_php5.6.dev
+- Go to sites-available and edit lxc_php5.6.dev
     ```
     cd ../sites-available
     nano lxc_php5.6.dev
     ```
     ![B1](asset/Picture25.png)
 
-- Edit server name di sites-available/lxc_php5.6.dev menjadi lxc_landing.dev
-  Server name adalah nama server yang nantinya akan dipanggil
+- Edit the server name in sites-available/lxc_php5.6.dev to lxc_landing.dev
+  Server name is the name of the server that will be called later
 
   ![B1](asset/Picture26.png)
 
-- Masuk direktori sites-enabled tampilkan isi dari folder dan symlink menggunakan:
+- Go to the sites-enabled directory display the contents of the folder and symlink it using:
     ```
     cd ../sites-enabled
     ls -la
     ```
   
-- Tes nginx dan reload nginx
+- nginx test and reload nginx
     ```
     nginx -t
     nginx -s reload
     ```
     ![B1](asset/Picture27.png)
   
-- Setting hosts dengan masuk ke direktori /etc/hosts lalu ubah ip server name menjadi 127.0.0.1 lxc_landing.dev
+- Setting hosts by going to the /etc/hosts directory and then changing the ip server name to 127.0.0.1 lxc_landing.dev
 
   ![B1](asset/Picture28.png)
 
-- Masuk ke direktori html selanjutnya cek terlebih dahulu isi folder 
+- Go to the html directory, then check the contents of the folder first 
     ```
     cd /var/www/html
     ls
@@ -218,34 +216,34 @@ ___
     ```
     ![B1](asset/Picture29.png)
   
-  Diketahui sudah ada folder bernama lxc_php5.6 sebelumnya lalu masuk ke direktori folder tersebut dan edit fie index.html didalamnya
+  It is known that there is already a folder called lxc_php5.6 before then go to the directory of the folder and edit the index.html file in it
     ```
     nano index.html
     ```
 
-- Ubah isi index.html menjadi informasi nama lxc 'Halaman ini dari lxc ubuntu_landing'
+- Change the contents of index.html to lxc name information 'This page is from lxc ubuntu_landing'
 
   ![B1](asset/Picture30.png)
 
-- Cek isi (http://lxc_landing.dev) pada localhost lxc ubuntu_landing menggunakan curl
+- Check the contents (http://lxc_landing.dev) on localhost lxc ubuntu_landing using curl
     ```
     curl -i http://lxc_landing.dev
     ```
     ![B1](asset/Picture31.png)
 
-### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
-- Keluar terlebih dahulu dari direktori lxc ubuntu_landing lalu stop service ubuntu landing
+### Number 5. LXC ubuntu_landing must auto start when the vm is turned on, this is used to keep the company profile website from experiencing downtime
+- First exit from ubuntu_landing lxc directory then stop service ubuntu landing
     ```
     exit
     sudo lxc-stop -n ubuntu_landing
     ```
-- Cek service status ubuntu_landing menjadi stopped
+- Check service status ubuntu_landing to be stopped
     ```
     lxc-ls -f
     ```
-  ![B1](asset/Picture32.png)
+    ![B1](asset/Picture32.png)
 
-- Masuk root lalu ke direktori /var/lib/lxc dan masuk ke direktori ubuntu_landing/config
+- Enter root then go to directory /var/lib/lxc and go to directory ubuntu_landing/config
     ```
     sudo su
     cd /vsr/lib/lxc
@@ -257,31 +255,29 @@ ___
 
   ![B1](asset/Picture33.png)
   
-- Tambahkan kode autostart 1
+- Add autostart code 1
     ```
     lxc.start.auto = 1
     ```
- 
- ![B1](asset/Picture34.png)
+    ![B1](asset/Picture34.png)
 
-- Cek apakah sudah benar autostart menjadi 1
+- Check whether the autostart is correct to 1
     ```
     lxc-ls -f
     ```
+    ![B1](asset/Picture35.png)
 
-  ![B1](asset/Picture35.png)
-
-### Soal 6. setup nginx pada vm.local untuk mengatur proxy_pass dimana :
+### Number 6. setup nginx on vm.local to set proxy_pass where :
 1. mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev
 2. mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev
 3. mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev
 
-- Setting hosts pada vm
-  Tambahkan ip dari debian_php5.6
+- Setting hosts on vm
+  Add ip of debian_php5.6
   
   ![B1](asset/Picture36.png)
 
-- Edit vm.local di sites-available
+- Edit vm.local at sites-available
     ```
     cd /etc/nginx/sites-available
     ls
@@ -290,46 +286,43 @@ ___
 
   ![B1](asset/Picture37.png)
   
-- Ubah proxy_pass
-  - mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev :
+- Change proxy_pass
+  - accessing http://vm.local will redirect to http://lxc_landing.dev :
     ```
     location / {
         rewrite /?(.*)$ /$1 break;
         proxy_pass http://lxc_landing.dev;
     }
     ```
-  Fungsi rewrite ialah untuk menghapus bagian belakang dari /
+  The rewrite function is to remove the back of /
   
-  proxy_pass diganti ke http://lxc_landing.dev
+  proxy_pass changed to http://lxc_landing.dev
   
   
-  - mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev :
+  - accessing http://vm.local/blog will redirect to http://lxc_php7.dev :
     ```
     location /blog {
         rewrite /blog/?(.*)$ /$1 break;
         proxy_pass http://lxc_php7.dev
     }
     ```
-  Fungsi rewrite ialah untuk menghapus bagian belakang dari /blog
+  The rewrite function is to remove the back of /blog
   
-  proxy_pass diganti ke http://lxc_php7.dev
+  proxy_pass changed to http://lxc_php7.dev
   
   
-  - mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev :
+  - accessing http://vm.local/app will redirect to http://lxc_php5.dev :
     ```
     location /app {
         rewrite /app/?(.*)$ /$1 break;
         proxy_pass http://lxc_php5.dev;
     }
     ```
-  Fungsi rewrite ialah untuk menghapus bagian belakang dari /app
-  
-  
-  proxy_pass diganti ke http://lxc_php5.dev
-  
-  ![B1](asset/Picture38.jpeg)
+    The rewrite function is to remove the back end of /app
+    proxy_pass changed to http://lxc_php5.dev
+    ![B1](asset/Picture38.jpeg)
 
-- Masuk sites-enabled reset nginx
+- Enter sites-enabled reset nginx
   ```
   cd ../sites-enabled
   sudo nginx -t
@@ -338,20 +331,19 @@ ___
 
   ![B1](asset/Picture39.png)
 
-### Soal 7. untuk kebutuhan presentasi mereka, browser di laptop mereka harus dapat mengakses ketiga url tersebut.
-
-- Cek secara local di vm apakah link berjalan dengan baik menggunakan curl
+### Number 7. For their presentation needs, the browser on their laptop must be able to access the three urls.
+- Check locally in the vm if the link is working properly using curl
   ```
   curl -i http://vm.local/
   curl -i http://vm.local/app
   curl -i http://vm.local/blog
   ```
   
-- Konfigurasi ip hosts pada laptop agar terhubung dengan virtual box dengan cara buka notepad sebagai admin lalu buka hosts pada C://windows/system32/driver/etc/hosts dan tambahkan ip virtual box yaitu 192.168.43.100 dengan server name vm.local
+- Configure the hosts ip on the laptop to connect to the virtual box by opening notepad as admin and then opening hosts at C://windows/system32/driver/etc/hosts and adding the virtual box ip which is 192.168.43.100 with the server name vm.local
 
     ![B1](asset/Picture40.png)
 
-- Coba pada browser
+- Try on the browser
   - http://vm.local/
 
   ![B1](asset/Picture41.png)
@@ -366,10 +358,10 @@ ___
 
 
 ### Soal 8. Menyiapkan analisa untuk diserahkan ke CTO
- - mengapa untuk kebutuhan php5.6 tidak bisa menggunakan ubuntu 16.04, sehingga perlu diganti os ke debian 9?
-    - Karena Ubuntu 16.04 xenial sudah mencapai akhir versi dan tidak support untuk php 5.6 pada bulan april tahun 2021
-- kenapa harus menggunakan virtualisasi LXC pada skema website yang akan didevelop?
-    - Menggunakan virtualisasi LXC memudahkan untuk membuat server karena skema pada website menggunakan sistem linux yang berbeda-beda.
-- apa yang dimaksud dengan proxy server? kenapa vm.local bisa kita anggap sebagai proxy server?
-    - Server proxy adalah sebuah komputer server atau program komputer yang dapat bertindak sebagai komputer lainnya untuk melakukan request terhadap content dari Internet atau intranet. Pada umumnya proxy server digunakan untuk mengamankan jaringan komputer pribadi yang terhubung dengan jaringan publik. Jadi, dari proxy server tersebut maka biasanya server diletakkan di antara aplikasi server dengan aplikasi client, dimana aplikasi client berupa web browser, client FTP dan lainnya sedangkan aplikasi server berupa server FTP dan web server.
-    - Vm.local sebagai server proxy dan halaman arahan web. Artinya vm.local jembatan untuk menghubungkan internet.
+- why for php5.6 needs can't use ubuntu 16.04, so it needs to be changed to debian 9 os?
+    - Because Ubuntu 16.04 xenial has reached the end of version and does not support php 5.6 in april 2021
+- why use LXC virtualization on the website schema to be developed?
+    - Using LXC virtualization makes it easy to create servers because the schema on the website uses different linux systems.
+- what is a proxy server? why can we think of vm.local as a proxy server?
+    - A proxy server is a computer server or computer program that can act as another computer to request content from the Internet or intranet. In general, proxy servers are used to secure private computer networks connected to public networks. So, from the proxy server, the server is usually placed between the application server and the client application, where the client application is a web browser, FTP client and others, while the server application is an FTP server and web server.
+    - Vm.local as proxy server and web landing page. It means vm.local bridge to connect internet.
