@@ -20,8 +20,7 @@ ___
     ![B1](asset/Picture1.png)
 
 - Stop service ubuntu_php5.6 sebelum rename
-![B1]
-(asset/Picture2.png)
+  ![B1](asset/Picture2.png)
 
 - Rename lxc
 ![B1](asset/Picture3.png)
