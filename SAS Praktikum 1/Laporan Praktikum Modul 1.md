@@ -13,69 +13,99 @@ Pada pelaksanaan pengerjaan soal praktikum , kita melakukan perubahan dengan kea
 #
 ### Soal 1. Rename ubuntu_php5.6 menjadi ubuntu_landing, serta rubah IP mengikuti skema yang baru
 ___
-- Menampilkan list LXC untuk mengecek sebelum di rename
+- Menampilkan list LXC untuk mengecek nama LXC sebelum direname
     ```
     sudo lxc -ls -f
     ```  
     ![B1](asset/Picture1.png)
 
-- Stop service ubuntu_php5.6 sebelum rename
+- Stop terlebih dahulu service pada ubuntu_php5.6
 
   ![B1](asset/Picture2.png)
 
-- Rename lxc
+- Ubah nama ubuntu_php5.6 menjadi ubuntu_landing
 
   ![B1](asset/Picture3.png)
 
-- Attach  dan start ubuntu landing
+- Start service ubuntu_landing lalu attach ubuntu_landing
+  ```
+    sudo lxc-start -n ubuntu_landing
+    sudo lxc-attach -n ubuntu_landing
+  ```  
 
   ![B1](asset/Picture4.png)
 
-- Ganti ip 103
+- Ganti IP pada LXC ubuntu_landing menjadi 10.0.3.103
 
   ![B1](asset/Picture5.png)
 
   ![B1](asset/Picture6.png)
 
-- Cek setting ip dari vm
+### Soal 2. Install lxc debian 9 dengan nama debian_php5.6
+- Cek setting IP di virtual machine
 
   ![B1](asset/Picture7.png)
 
-- Cek apakah bisa tersambung internet
+- Cek apakah bisa tersambung ke internet
 
   ![B1](asset/Picture8.png)
 
-- Mengganti ip static ke dhcp lagi untuk download repositori dari Debian
-
-  ![B1](asset/Picture9.png)
-
-- Mengganti sources list ubuntu
+- Tambahkan kode berikut pada sources list ubuntu
     ```
     sudo nano /etc/apt/sources.list
     ```
   ![B1](asset/Picture10.png)
-
-### Soal 2. Install lxc debian 9 dengan nama debian_php5.6
+  
 - Install lxc Debian 9
+  ```
+  sudo lxc-create -n debian_php5.5 -t download -- --dist debian --release stretch --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+  ```
 
   ![B1](asset/Picture11.png)
-
-  ![B1](asset/Picture12.png)
+  
+  - Update debian_php5.6
 
   ![B1](asset/Picture13.png)
+  
+  - Informasi debian release
 
   ![B1](asset/Picture14.png)
 
 ### Soal 3. setup nginx pada debian_php5.6 untuk domain http://lxc_php5.dev , buat halaman index.html yang menerangkan informasi nama lxc
-- Exit ubuntu landing, start dan attach Debian, install nginx extra
-
+- Exit ubuntu landing
+  ```
+  Exit
+  ```
+  Start dan attach debian_php5.6 lalu install nginx dan nginx extra pada debian_php5.6
+  ```
+  sudo lxc-start -n debian_php5.6
+  sudo lxc-attach -n debian_php5.6
+  sudo apt install nginx nginx-extras
+  ```
   ![B1](asset/Picture15.png)
 
 - Install curl dan setting ip
+   ```
+  apt install nano net-tools curl
+  nano /etc/network/interfaces
+  ```
 
   ![B1](asset/Picture16.png)
 
   ![B1](asset/Picture17.png)
+  
+  Restart service networking
+  ```
+  systemctl restart networking.service
+  ```
+  Alternatif apabila tidak terganti IP nya :
+  ```
+  shutdown now
+  sudo lxc-start -n debian_php5.6
+  sudo lxc-attach -n debian_php5.6
+  ```
+  
+  Cek IP apakah sudah ganti ataukah belum menggunakan ifconfig
 
   ![B1](asset/Picture18.png)
 
