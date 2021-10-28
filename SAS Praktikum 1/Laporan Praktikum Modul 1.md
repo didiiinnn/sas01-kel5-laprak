@@ -24,22 +24,29 @@ ___
 ![B1](asset/Picture2.png)
 
 - Rename lxc
+
 ![B1](asset/Picture3.png)
 
 - Attach  dan start ubuntu landing
+
 ![B1](asset/Picture4.png)
 
 - Ganti ip 103
+
 ![B1](asset/Picture5.png)
+
 ![B1](asset/Picture6.png)
 
 - Cek setting ip dari vm
+
 ![B1](asset/Picture7.png)
 
 - Cek apakah bisa tersambung internet
+
 ![B1](asset/Picture8.png)
 
 - Mengganti ip static ke dhcp lagi untuk download repositori dari Debian
+
 ![B1](asset/Picture9.png)
 
 - Mengganti sources list ubuntu
@@ -50,48 +57,66 @@ ___
 
 ### Soal 2. Install lxc debian 9 dengan nama debian_php5.6
 - Install lxc Debian 9
+
 ![B1](asset/Picture11.png)
+
 ![B1](asset/Picture12.png)
+
 ![B1](asset/Picture13.png)
+
 ![B1](asset/Picture14.png)
 
 ### Soal 3. setup nginx pada debian_php5.6 untuk domain http://lxc_php5.dev , buat halaman index.html yang menerangkan informasi nama lxc
 - Exit ubuntu landing, start dan attach Debian, install nginx extra
+
 ![B1](asset/Picture15.png)
 
 - Install curl dan setting ip
+
 ![B1](asset/Picture16.png)
+
 ![B1](asset/Picture17.png)
+
 ![B1](asset/Picture18.png)
 
 - Masuk ke sites available buat file lxc5.6.dev
+
 ![B1](asset/Picture19.png)
 
 - Buat symlink dan tes nginx
+
 ![B1](asset/Picture20.png)
 
 - Setting hosts
+
 ![B1](asset/Picture21.png)
 
 - Masuk var/www/html, copy, edit index di folder php5.6
+
 ![B1](asset/Picture22.png)
+
 ![B1](asset/Picture23.png)
 
 - Cek http lxc_php5.dev
+
 ![B1](asset/Picture24.png)
 
 ### Soal 4. setup nginx pada ubuntu_landing untuk domain http://lxc_landing.dev , buat halaman index.html yang menerangkan informasi nama lxc
 - Masuk direktori ubuntu landing
 - Masuk sites-available edit lxc_php5.6.dev
+
 ![B1](asset/Picture25.png)
 
 - Edit server name di sites-available php5.6.dev
+
 ![B1](asset/Picture26.png)
 
 - Tes nginx di sites-enabled dan reload nginx edit hosts
+
 ![B1](asset/Picture27.png)
 
 - Ubah ip hosts lxc landing
+
 ![B1](asset/Picture28.png)
 
 - Cek index yg sdh ada sebelum e diganti
@@ -111,9 +136,11 @@ ___
 
 ### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
 - Tambahkan kode autostart 1
+ 
  ![B1](asset/Picture34.png)
 
 - Cek apa sudah nyala saat boot
+
 ![B1](asset/Picture35.png)
 
 ### Soal 6. setup nginx pada vm.local untuk mengatur proxy_pass dimana :
@@ -121,13 +148,17 @@ ___
 - mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev
 - mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev
     - Setting hosts
+    
     ![B1](asset/Picture36.png)
 
 - Edit vm.local di sites-available
+
 ![B1](asset/Picture37.png)
+
 ![B1](asset/Picture38.png)
 
 - Masuk sites-enabled reset nginx
+
 ![B1](asset/Picture39.png)
 
 ### Soal 7. untuk kebutuhan presentasi mereka, browser di laptop mereka harus dapat mengakses ketiga url tersebut.
