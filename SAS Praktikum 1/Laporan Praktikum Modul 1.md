@@ -166,7 +166,7 @@ nano lxc_php5.6.dev
   
   ![B1](asset/Picture23.png)
 
-- Cek isi http lxc_php5.dev menggunakan curl dari localhost
+- Cek isi http lxc_php5.dev menggunakan curl dari localhost lxc debian_php5.6
   ```
   kode
   ```
@@ -207,65 +207,132 @@ nano lxc_php5.6.dev
 
   ![B1](asset/Picture28.png)
 
-- Cek index yg sdh ada sebelum e diganti
-
+- Masuk ke direktori html namun cek terlebih dahulu isi folder menggunakan:
+  ```
+  ls
+  ```
+  
   ![B1](asset/Picture29.png)
+  
+  Diketahui sudah ada folder bernama lxc_php5.6 sebelumnya lalu masuk ke direktori folder tersebut dan edit fie index.html didalamnya
+  ```
+  nano index.html
+  ```
 
-- Edit index.html
+- Ubah isi index.html menjadi informasi nama lxc 'Halaman ini dari lxc ubuntu_landing'
 
   ![B1](asset/Picture30.png)
 
-- Cek curl (http://lxc_landing.dev)
+- Cek isi (http://lxc_landing.dev) pada localhost lxc ubuntu_landing menggunakan curl
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture31.png)
 
-- Keluar terlebih dahulu lalu stop service ubuntu landing
-
+### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
+- Keluar terlebih dahulu dari direktori lxc ubuntu_landing lalu stop service ubuntu landing
+  ```
+  kode
+  ```
+  Cek service status ubuntu_landing menjadi stopped
+  ```
+  lxc-ls -f
+  ``
   ![B1](asset/Picture32.png)
 
-- Masuk root dan var lib lxc cari ubuntu landing cofig
+- Masuk root lalu ke direktori /var/lib/lxc dan masuk ke direktori ubuntu_landing/config
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture33.png)
-
-### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
+  
 - Tambahkan kode autostart 1
+  ```
+  kode
+  ```
  
  ![B1](asset/Picture34.png)
 
-- Cek apa sudah nyala saat boot
+- Cek apakah sudah benar autostart menjadi 1
+  ```
+  lxc-ls -f
+  ```
 
   ![B1](asset/Picture35.png)
 
 ### Soal 6. setup nginx pada vm.local untuk mengatur proxy_pass dimana :
-- mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev
-- mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev
-- mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev
-    - Setting hosts
-    
-    ![B1](asset/Picture36.png)
+1. mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev
+2. mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev
+3. mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev
+
+- Setting hosts pada vm
+  Tambahkan ip dari debian_php5.6
+  
+  ![B1](asset/Picture36.png)
 
 - Edit vm.local di sites-available
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture37.png)
-
+  
+- Ubah proxy_pass
+  - mengakses http://vm.local akan diarahkan ke http://lxc_landing.dev :
+  ```
+  kode
+  ```
+  Fungsi rewrite ialah untuk menghapus bagian belakang dari /
+  proxy_pass diganti ke http://lxc_landing.dev
+  
+  - mengakses http://vm.local/blog akan diarahkan ke http://lxc_php7.dev :
+   ```
+  kode
+  ```
+  Fungsi rewrite ialah untuk menghapus bagian belakang dari /blog
+  proxy_pass diganti ke http://lxc_php7.dev
+  
+  - mengakses http://vm.local/app akan diartahkan ke http://lxc_php5.dev :
+  ```
+  kode
+  ```
+  Fungsi rewrite ialah untuk menghapus bagian belakang dari /app
+  proxy_pass diganti ke http://lxc_php5.dev
+  
   ![B1](asset/Picture38.png)
 
 - Masuk sites-enabled reset nginx
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture39.png)
 
 ### Soal 7. untuk kebutuhan presentasi mereka, browser di laptop mereka harus dapat mengakses ketiga url tersebut.
 
-- Cek di curl
-- Konfigurasi ip hosts laptop
+- Cek secara local di vm apakah link berjalan dengan baik menggunakan curl
+  ```
+  curl -i http://vm.local/
+  curl -i http://vm.local/app
+  curl -i http://vm.local/blog
+  ```
+  
+- Konfigurasi ip hosts pada laptop agar terhubung dengan virtual box dengan cara buka notepad sebagai admin lalu buka hosts pada C://windows/system32/driver/etc/hosts dan tambahkan ip virtual box yaitu 192.168.43.100 dengan server name vm.local
 
     ![B1](asset/Picture40.png)
 
-- Coba browser
+- Coba pada browser
+  - http://vm.local/
 
   ![B1](asset/Picture41.png)
+  
+  - http://vm.local/app
 
   ![B1](asset/Picture42.png)
+  
+  - http://vm.local/blog
 
   ![B1](asset/Picture43.png)
 
