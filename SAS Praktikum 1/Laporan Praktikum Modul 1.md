@@ -1,9 +1,9 @@
 # Laporan Praktikum 1 - Sistem Administrasi Server 
-## Disusun oleh :
-## Chintya Tribhuana Utami (1202190041)
-## Nur Wulan Maudini (1202190002)
-#
-#
+Disusun oleh :
+  Chintya Tribhuana Utami (1202190041)
+  Nur Wulan Maudini (1202190002)
+
+
 # ______________________________________
 
 Praktikum dikerjakan berdasarkan skema yang tertera di soal dan soal dapat diakses [Klikdisini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-1/soal_praktikum.md)
