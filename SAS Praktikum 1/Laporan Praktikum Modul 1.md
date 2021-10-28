@@ -120,18 +120,23 @@ ___
 ![B1](asset/Picture28.png)
 
 - Cek index yg sdh ada sebelum e diganti
- ![B1](asset/Picture29.png)
+
+![B1](asset/Picture29.png)
 
 - Edit index.html
+
 ![B1](asset/Picture30.png)
 
 - Cek curl (http://lxc_landing.dev)
- ![B1](asset/Picture31.png)
+
+![B1](asset/Picture31.png)
 
 - Keluar terlebih dahulu lalu stop service ubuntu landing
- ![B1](asset/Picture32.png)
+
+![B1](asset/Picture32.png)
 
 - Masuk root dan var lib lxc cari ubuntu landing cofig
+
 ![B1](asset/Picture33.png)
 
 ### Soal 5. LXC ubuntu_landing harus auto start ketika vm dinyalakan, hal ini digunakan untuk menjaga agar website company profile tidak mengalami downtime
@@ -171,7 +176,9 @@ ___
 - Coba browser
 
 ![B1](asset/Picture41.png)
+
 ![B1](asset/Picture42.png)
+
 ![B1](asset/Picture43.png)
 
 
