@@ -108,12 +108,27 @@ ___
   Cek IP apakah sudah ganti ataukah belum menggunakan ifconfig
 
   ![B1](asset/Picture18.png)
-
-- Masuk ke sites available buat file lxc5.6.dev
+  
+- Masuk ke direktori sites-available pada nginx debian_php5.6
+```
+cd /etc/nginx/sites-available
+```
+- Buat file baru bernama lxc_php5.6.dev
+```
+touch lxc_php5.6.dev
+```
+- Edit lxc_php5.6
+```
+nano lxc_php5.6.dev
+```
 
   ![B1](asset/Picture19.png)
 
-- Buat symlink dan tes nginx
+- Masuk ke direktori sites-enabled pada nginx debian_php5.6 untuk membuat symlink ke sites-available/lxc_php5.6
+- Tes nginx dan restart service nginx
+  ```
+  kode
+  ```
 
   ![B1](asset/Picture20.png)
 
