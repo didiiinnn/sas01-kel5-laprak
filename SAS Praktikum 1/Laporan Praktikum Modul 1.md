@@ -276,7 +276,7 @@ ___
 - Setting hosts on vm
   Add ip of debian_php5.6
   
-  ![B1](asset/Picture36.png)
+  ![B1](asset/Picture38.jpeg)
 
 - Edit vm.local at sites-available
     ```
@@ -321,7 +321,7 @@ ___
     ```
     The rewrite function is to remove the back end of /app
     proxy_pass changed to http://lxc_php5.dev
-    ![B1](asset/Picture38.jpeg)
+    ![B1](asset/Picture38.png)
 
 - Enter sites-enabled reset nginx
   ```
