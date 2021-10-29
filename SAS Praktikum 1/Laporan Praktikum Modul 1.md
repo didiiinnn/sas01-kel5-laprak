@@ -23,6 +23,7 @@ ___
   ![B1](asset/Picture2.png)
 
 - Rename ubuntu_php5.6 to ubuntu_landing
+
   ![B1](asset/Picture3.png)
 
 - Start service ubuntu_landing and then attach ubuntu_landing
