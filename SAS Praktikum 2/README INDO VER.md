@@ -231,7 +231,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ![A1](asset/33.png)
 - Jalankan ssh root nya
   ```
-  ssh root@lxc_php7.4.dev
+  ssh root@lxc_php7.dev
   ```
   ![A1](asset/34.png)
 - Backup dan matikan autostart nya
