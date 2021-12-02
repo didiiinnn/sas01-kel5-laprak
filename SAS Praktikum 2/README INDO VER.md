@@ -812,6 +812,6 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
 - Jalankan
   ```
   cd ~/ansible/modul2-ansible
-  ansible-playbook -i hosts
+  ansible-playbook -i hosts ubah-socket.yml -k
   ``` 
   ![A1](asset/53.png)
