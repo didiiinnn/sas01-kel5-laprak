@@ -231,7 +231,7 @@ In the implementation of working on practical questions, we made changes to the 
   ![A1](asset/33.png)
 - Run ssh root
   ```
-  ssh root@lxc_php7.4.dev
+  ssh root@lxc_php7.dev
   ```
   ![A1](asset/34.png)
 - Backup and turn off the autostart
