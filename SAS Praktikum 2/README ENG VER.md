@@ -3,36 +3,36 @@ Arranged by :
 1. Chintya Tribhuana Utami (1202190041)
 2. Nur Wulan Maudini (1202190002)
 #
-Praktikum dilaksanakan berdasarkan keadaan yang tertera pada soal dan soal dapat diakses [Klik disini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-2/soal_praktikum.md)
+The practicum is carried out based on the conditions listed in the questions and questions can be accessed [Click here.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-2/soal_praktikum.md)
 #
-Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan keadaan awal dari soal-soal latihan sebelumnya dengan soal-soal praktikum yang telah diberikan kali ini.
+In the implementation of working on practical questions, we made changes to the initial state of the previous practice questions with the practical questions that have been given this time.
 #
-### Nomor 1. Change focal ubuntu_landing
-- Menampilkan list LXC sebelum mengubah LXC
+### Number 1. Change focal ubuntu_landing
+- Display LXC list before changing LXC
   ```
   sudo lxc -ls -f
   ```  
   ![A1](asset/1.png)
 
-- Hapus ubuntu_landing_backup terlebih dahulu kemudian hapus ubuntu_landing. Jangan lupa ketika ingin menghapus, pastikan LXC sudah berhenti.
+- Delete ubuntu_landing_backup first then delete ubuntu_landing. Don't forget when you want to delete, make sure LXC has stopped.
   ```
   sudo lxc-destroy ubuntu_landing_backup
   
-  #cek apakah sudah terhapus
+  #check if it's been deleted
   sudo lxc -ls -f
 
   #stop ubuntu_landing
   sudo lxc-stop -n ubuntu_landing
 
-  #hapus ubuntu_landing
+  #destroy ubuntu_landing
   sudo lxc-destroy ubuntu_landing
 
-  #cek lagi apakah sudah terhapus semua
+  #check again if everything has been deleted
   sudo lxc -ls -f
   ```
   ![A1](asset/2.png)
 
-- Buat lxc ubuntu_landing dg versi 20
+- Create LXC ubuntu_landing with version 20
   ```
   sudo lxc-create -n ubuntu_landing -t download -- --dist ubuntu --release focal fossa --arch amd64 --foce-cache --no-validate --server images.linuxcontainers.org
   ```
@@ -51,7 +51,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   sudo apt install nginx nginx-extras
   ```
   ![A1](asset/5.png)
-- Install nano terlebih dahulu, lalu edit ip nya menjadi static
+- Install nano first, then edit the ip to be static
   ```
   sudo nano /etc/netplan/10-lxc.yaml
   ```
@@ -60,7 +60,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ifconfig
   ```
   ![A1](asset/7.png)
-- Buat file di sites-available dengan nama lxc_landing.dev
+- Create a file in sites-available with the name lxc_landing.dev
   ```
   cd /etc/nginx/sites-available
   touch lxc_landing.dev
@@ -69,7 +69,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ![A1](asset/8.png)
   ###
   ![A1](asset/9.png)
-- Buat symlink di sites-enabled yang mengarah ke sites-available
+- Create a symlink in sites-enabled that points to sites-available
   ```
   cd ../sites-enabled
   ln -s /etc/nginx/sites-available/lxc_landing.dev .
@@ -85,7 +85,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   nano /etc/hosts
   ```
   ![A1](asset/12.png)
-- Masuk ke var html
+- Enter ke var html
   ```
   cd /var/www/html
   mkdir lxc_landing
@@ -94,17 +94,17 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   nano index.html
   ```
   ![A1](asset/13.png)
-- Cek curl
+- Check curl
   ```
   curl -i http://lxc_landing.dev
   ```
   ![A1](asset/14.png)
-- Install dan setting ssh
+- Install and setting ssh
   ```
   sudo apt install openssh-server python
   nano /etc/ssh/sshd_config
 
-  #setting config menjadi
+  #setting config to
   PermitRootLogin yes
   RSAAuthentication yes
 
@@ -121,12 +121,12 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ![A1](asset/16.png)
   ###
   ![A1](asset/17.png)
-- cek ssh root apakah dapat berjalan
+- Check ssh root if it can run
   ```
   ssh root@lxc_landing.dev
   exit
   ```
-- Backup dan matikan autostart nya
+- Backup and turn off the autostart
   ```
   sudo lxc-stop -n ubuntu_landing
   sudo lxc-copy -n ubuntu_landing -N ubuntu_landing_backup -sKD
@@ -135,7 +135,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ###
   ![A1](asset/19.png)
 #
-### Nomor 2. Ganti focal ubutu_php7.4
+### Number 2. Change the focal ubuntu_php7.4
 - Destroy ubuntu
   ```
   sudo su
