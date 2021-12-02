@@ -286,46 +286,47 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
 - Isi main.yml pada tasks
   ```
   ---
-  name: delete apt chache
-  become: yes
-  become_user: root
-  become_method: su
-  command: rm -vf /var/lib/apt/lists/*
+  - name: delete apt chache
+    become: yes
+    become_user: root
+    become_method: su
+    command: rm -vf /var/lib/apt/lists/*
 
-  name: install requirement dpkg to install php7.4
-  become: yes
-  become_user: root
-  become_method: su
-  apt: name={{ item }} state=latest update_cache=true
-  with_items:
-  ca-certificates
-  apt-transport-https
-  curl
-  python-apt
-  software-properties-common
+  - name: install requirement dpkg to install php7.4
+    become: yes
+    become_user: root
+    become_method: su
+    apt: name={{ item }} state=latest update_cache=true
+    with_items:
+      - ca-certificates
+      - apt-transport-https
+      - curl
+      - python-apt
+      - software-properties-common
 
-  name: Add Php Repository 7.4
-  apt_repository:
-  repo: "ppa:ondrej/php"
-  state: present
-  filename: php.list
-  update_cache: true
-  name: install nginx php7.4
-  become: yes
-  become_user: root
-  become_method: su
-  apt: name={{ item }} state=latest update_cache=true
-  with_items:
-  nginx
-  nginx-extras
-  php7.4
-  php7.4-fpm
-  php7.4-curl
-  php7.4-mbstring
-  php7.4-xml
-  php7.4-gd
-  php7.4-opcache
-  php7.4-zip php7.4 -y
+  - name: Add Php Repository 7.4
+    apt_repository:
+      repo: "ppa:ondrej/php"
+      state: present
+    filename: php.list
+    update_cache: true
+  
+  - name: install nginx php7.4
+    become: yes
+    become_user: root
+    become_method: su
+    apt: name={{ item }} state=latest update_cache=true
+    with_items:
+     - nginx
+     - nginx-extras
+     - php7.4
+     - php7.4-fpm
+     - php7.4-curl
+     - php7.4-mbstring
+     - php7.4-xml
+     - php7.4-gd
+     - php7.4-opcache
+     - php7.4-zip php7.4 -y
   
   - name: Download and install Composer
     shell: curl -sS https://getcomposer.org/installer | php
@@ -345,6 +346,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
       remote_src: yes
     
   - name: Composer create project
+    become_user: root
     composer:
       command: create-project
       arguments: laravel/laravel landing
@@ -353,63 +355,63 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
     environment:
       COMPOSER_NO_INTERACTION: "1"
      
-      name: set APP_URL
-      lineinfile:
-      dest=/var/www/html/landing/.env
-      regexp='^APP_URL='
-      line=APP_URL=http://vm.local
+   - name: set APP_URL
+     lineinfile:
+       dest=/var/www/html/landing/.env
+       regexp='^APP_URL='
+       line=APP_URL=http://vm.local
       
-      name: set DB_HOST
-      lineinfile:
-      dest=/var/www/html/landing/.env
-      regexp='^DB_HOST='
-      line=DB_HOST=10.0.3.200
+   - name: set DB_HOST
+     lineinfile:
+       dest=/var/www/html/landing/.env
+       regexp='^DB_HOST='
+       line=DB_HOST=10.0.3.200
       
-      name: set DB_DATABASE
-      lineinfile:
-      dest=/var/www/html/landing/.env
-      regexp='^DB_DATABASE='
-      line=DB_DATABASE=landing
+   - name: set DB_DATABASE
+     lineinfile:
+       dest=/var/www/html/landing/.env
+       regexp='^DB_DATABASE='
+       line=DB_DATABASE=landing
       
-      name: set DB_USERNAME
-      lineinfile:
-      dest=/var/www/html/landing/.env
-      regexp='^DB_USERNAME='
-      line=DB_USERNAME=admin
+   - name: set DB_USERNAME
+     lineinfile:
+        dest=/var/www/html/landing/.env
+        regexp='^DB_USERNAME='
+        line=DB_USERNAME=admin
       
-      name: set DB_PASSWORD
-      lineinfile:
-      dest=/var/www/html/landing/.env
-      regexp='^DB_PASSWORD='
-      line=DB_PASSWORD=chintya
+   - name: set DB_PASSWORD
+     lineinfile:
+       dest=/var/www/html/landing/.env
+       regexp='^DB_PASSWORD='
+       line=DB_PASSWORD=chintya
       
-      name: change permission storage
+    - name: change permission storage
       command: chmod -R 777 /var/www/html/landing/storage
       
-      name: Copy landing.conf
+    - name: Copy landing.conf
       template:
-      src=templates/landing
-      dest=/etc/nginx/sites-available/{{ domain }}
+        src=templates/landing
+        dest=/etc/nginx/sites-available/{{ domain }}
       vars:
-      servername: '{{ domain }}'
+        servername: '{{ domain }}'
       
-      name: Delete another nginx config
+    - name: Delete another nginx config
       become: yes
       become_user: root
       become_method: su
       command: rm -f /etc/nginx/sites-enabled/*
       
-      name: Symlink landing.conf
+    - name: Symlink landing.conf
       command: ln -sfn /etc/nginx/sites-available/{{ domain }} /etc/nginx/sites-enabled/{{ domain }}
       notify:
-      restart nginx
+        restart nginx
       
-      name: Write {{ domain }} to /etc/hosts
+    - name: Write {{ domain }} to /etc/hosts
       lineinfile:
-      dest: /etc/hosts
-      regexp: '.*{{ domain }}$'
-      line: "127.0.0.1   {{ domain }}"
-      state: present
+        dest: /etc/hosts
+        regexp: '.*{{ domain }}$'
+        line: "127.0.0.1   {{ domain }}"
+        state: present
   ```
 
 - Isi landing pada templates
