@@ -163,7 +163,7 @@ In the implementation of working on practical questions, we made changes to the 
   sudo apt install nginx nginx-extras
   ```
   ![A1](asset/23.png)
-- Install nano terlebih dahulu, lalu edit ip nya menjadi static
+- Install nano first, then edit the ip to be static
   ```
   sudo nano /etc/netplan/10-lxc.yaml
   ```
@@ -172,14 +172,14 @@ In the implementation of working on practical questions, we made changes to the 
   ifconfig
   ```
   ![A1](asset/25.png)
-- Buat file di sites-available dengan nama lxc_php7.4.dev
+- Create a file in sites-available with the name lxc_php7.4.dev
   ```
   cd /etc/nginx/sites-available
   touch lxc_php7.4.dev
   nano lxc_php7.4.dev
   ```
   ![A1](asset/26.png)
-- Buat symlink di sites-enabled yang mengarah ke sites-available
+- Create a symlink in sites-enabled that points to sites-available
   ```
   cd ../sites-enabled
   ln -s /etc/nginx/sites-available/lxc_7.4.dev .
@@ -192,7 +192,7 @@ In the implementation of working on practical questions, we made changes to the 
   nano /etc/hosts
   ```
   ![A1](asset/28.png)
-- Masuk ke var html
+- Enter var html
   ```
   cd /var/www/html
   mkdir lxc_php7.4
@@ -201,12 +201,12 @@ In the implementation of working on practical questions, we made changes to the 
   nano index.html
   ```
   ![A1](asset/29.png)
-- Cek curl
+- Check curl
   ```
   curl -i http://lxc_php7.4.dev
   ```
   ![A1](asset/30.png)
-- Install dan setting ssh 
+- Install and setting ssh 
   ```
   sudo lxc-attach -n ubuntu_php7.4
   sudo apt install openssh-server python
@@ -229,12 +229,12 @@ In the implementation of working on practical questions, we made changes to the 
   ![A1](asset/32.png)
   ###
   ![A1](asset/33.png)
-- Jalankan ssh root nya
+- Run ssh root
   ```
   ssh root@lxc_php7.4.dev
   ```
   ![A1](asset/34.png)
-- Backup dan matikan autostart nya
+- Backup and turn off the autostart
   ```
   sudo su
   lxc-stop -n ubuntu_php7.4
@@ -244,8 +244,8 @@ In the implementation of working on practical questions, we made changes to the 
   ###
   ![A1](asset/36.png)
 #
-### Nomor 3. vm.local/ (Laravel)
-- Edit hosts di modul2-ansible
+### Number 3. vm.local/ (Laravel)
+- Edit hosts in module2-ansible
   ```
   cd ~/ansible/modul2-ansible
   nano hosts
@@ -261,12 +261,12 @@ In the implementation of working on practical questions, we made changes to the 
   ssh root@ubuntu_landing
   ```
   ![A1](asset/39.png)
-- buat file deploy-laravel.yml
+- Creat file deploy-laravel.yml
   ```
   cd ~/ansible/modul2-ansible
   nano deploy-laravel.yml
   ```
-- isi dari deploy-laravel.yml
+- Contents of deploy-laravel.yml
   ```
   - hosts: landing
   vars:
@@ -275,7 +275,7 @@ In the implementation of working on practical questions, we made changes to the 
     - { role: laravel }
   ```
   ![A1](asset/40.png)
-- Buat roles/Laravel berisi:
+- Create roles/Laravel containing:
   ```
   mkdir -p roles/laravel/tasks
   mkdir -p roles/laravel/handlers
@@ -283,7 +283,7 @@ In the implementation of working on practical questions, we made changes to the 
   ```
   ![A1](asset/41.png)
   
-- Isi main.yml pada tasks
+- Fill main.yml in tasks
   ```
   ---
   name: delete apt chache
@@ -412,7 +412,7 @@ In the implementation of working on practical questions, we made changes to the 
       state: present
   ```
 
-- Isi landing pada templates
+- Contents of landing on templates
   ```
   server {
 
@@ -477,7 +477,7 @@ In the implementation of working on practical questions, we made changes to the 
 - Hasil
   ![A1](asset/44.png)
 #
-### Nomor 4. vm.local/blog (Wordpress)
+### Number 4. vm.local/blog (Wordpress)
 - Edit deploy-wp
   ```
   cd ~/ansible/modul2-ansible
@@ -595,7 +595,7 @@ In the implementation of working on practical questions, we made changes to the 
       - restart php
   ```
 
-- Isi pada /templates/wp.conf
+- Fill in /templates/wp.conf
   ```
   <?php
   /**
@@ -698,7 +698,7 @@ In the implementation of working on practical questions, we made changes to the 
   require_once ABSPATH . 'wp-settings.php';
   ```
 
-- Isi pada /templates/wp.local
+- Fill ini /templates/wp.local
   ```
   server {
 
@@ -725,7 +725,7 @@ In the implementation of working on practical questions, we made changes to the 
       }
   }
   ```
-- Isi /handlers/main.yml
+- Contents of /handlers/main.yml
   ```
   ---
   - name: restart nginx
@@ -741,13 +741,13 @@ In the implementation of working on practical questions, we made changes to the 
   action: service name=php7.4-fpm state=restarted
   ```
   ![A1](asset/47.png)
-- Jalankan
+- Run
   ```
   cd ~/ansible/modul2-ansible
   ansible-playbook -i hosts deploy-wp.yml -k
   ```
   ![A1](asset/48.png)
-- Hasil
+- Results
   ![A1](asset/49.png)
   ###
   ![A1](asset/50.png)
@@ -756,8 +756,8 @@ In the implementation of working on practical questions, we made changes to the 
   ###
   ![A1](asset/52.png)
 #
-### Nomor 5. Soal tambahan
-- buat file ubah-socket.yml
+### Number 5. Additional questions
+- Create file change-socket.yml
   ```
   hosts: landing
   tasks:
@@ -807,9 +807,9 @@ In the implementation of working on practical questions, we made changes to the 
       become_method: su
       action: service name=php7.4-fpm state=restarted
   ```
-- Jalankan
+- Run
   ```
   cd ~/ansible/modul2-ansible
-  ansible-playbook -i hosts
+  ansible-playbook -i hosts ubah-socket.yml -k
   ``` 
   ![A1](asset/53.png)
