@@ -152,7 +152,7 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ![A1](asset/21.png)
 - Setting autostart
   ```
-  echo "lxc.start.auto = 1" >> /var/lib/lxc/ubuntu_landing/config
+  echo "lxc.start.auto = 1" >> /var/lib/lxc/ubuntu_php7.4/config
   exit
   ```
   ![A1](asset/22.png)
