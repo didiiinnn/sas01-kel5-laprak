@@ -815,3 +815,11 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
   ansible-playbook -i hosts ubah-socket.yml -k
   ``` 
   ![A1](asset/53.png)
+  
+- Hasil di lxc_landing.dev
+
+  ![A1](asset/54.png)
+  
+- Hasil di lxc_php7.dev
+
+  ![A1](asset/55.png)
