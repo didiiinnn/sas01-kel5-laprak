@@ -761,8 +761,8 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
 ### Nomor 5. Soal tambahan
 - buat file ubah-socket.yml
   ```
-- hosts: landing
-  tasks:
+  - hosts: landing
+    tasks:
     - name: www.conf
       lineinfile:
          dest: /etc/php/7.4/fpm/pool.d/www.conf
@@ -782,8 +782,8 @@ Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan kead
       become_method: su
       action: service name=nginx state=restarted
 
-- hosts: php7
-  tasks:
+  - hosts: php7
+    tasks:
     - name: www.conf
       lineinfile:
          dest: /etc/php/7.4/fpm/pool.d/www.conf
