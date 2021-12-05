@@ -1,0 +1,47 @@
+- hosts: landing
+  tasks:
+    - name: www.conf
+      lineinfile:
+         dest: /etc/php/7.4/fpm/pool.d/www.conf
+         regexp: '^listen = /run/php/php7.4-fpm.sock'
+         line: listen = 127.0.0.1:9001
+         state: present
+
+    - name: rubah di sites-available
+      lineinfile:
+         dest: /etc/nginx/sites-available/lxc_landing.dev
+         regexp: '^        fastcgi_pass'
+         line:         fastcgi_pass 127.0.0.1:9001;
+
+    - name: restart nginx
+      become: yes
+      become_user: root
+      become_method: su
+      action: service name=nginx state=restarted
+
+- hosts: php7
+  tasks:
+    - name: www.conf
+      lineinfile:
+         dest: /etc/php/7.4/fpm/pool.d/www.conf
+         regexp: '^listen = /run/php/php7.4-fpm.sock'
+         line: listen = 127.0.0.1:9001
+         state: present
+
+    - name: rubah di sites-available
+      lineinfile:
+         dest: /etc/nginx/sites-available/lxc_php7.dev
+         regexp: '^        fastcgi_pass'
+         line:       fastcgi_pass 127.0.0.1:9001;
+
+    - name: restart nginx
+      become: yes
+      become_user: root
+      become_method: su
+      action: service name=nginx state=restarted
+
+    - name: restart php
+      become: yes
+      become_user: root
+      become_method: su
+      action: service name=php7.4-fpm state=restarted
