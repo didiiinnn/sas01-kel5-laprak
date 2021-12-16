@@ -16,10 +16,12 @@ sudo mkdir -p roles/laravel/handlers
 ```
 ![A1](asset/Picture1.png)
 ###
-In ansible create setting-landing.yml containing:
+In ansible create setting-landing.yml containing :
+###
 ![A1](asset/Picture2.png)
 ###
 In Laravel/tasks/main.yml containing:
+###
 ![A1](asset/Picture3.png)
 ```
 ---
@@ -80,7 +82,8 @@ In Laravel/tasks/main.yml containing:
   notify:
     - restart bind
 ```
-In Laravel/handlers/main.yml containing:
+In Laravel/handlers/main.yml containing :
+###
 ![A1](asset/Picture4.png)
 ```
 ---
@@ -104,6 +107,7 @@ In Laravel/handlers/main.yml containing:
   action: service name=bind9 state=restarted
 ```
 In Laravel/template/named.conf.local containing :
+###
 ![A1](asset/Picture5.png)
 ```
 //
@@ -125,6 +129,7 @@ zone "1.168.192 .in-addr.arpa" {
 };
 ```
 In Laravel/template/vm.local containing :
+###
 ![A1](asset/Picture6.png)
 ```
 ;
@@ -143,6 +148,7 @@ $TTL    604800
 dev     IN      CNAME   vm.local.
 ```
 In Laravel/template/ 1.168.192 .in-addr.arpa containing :
+###
 ![A1](asset/Picture7.png) 
 ```
 ;
@@ -160,6 +166,7 @@ $TTL    604800
 100                       IN      PTR     vm.local. ; byte ke 4 IP VM
 ```
 In Laravel/template/resolv.conf containing :
+###
 ![A1](asset/Picture8.png)
 ```
 # This file is managed by man:systemd-resolved(8). Do not edit.
@@ -184,6 +191,7 @@ In Laravel/template/resolv.conf containing :
 nameserver 192.168.1.100 
 ```
 In Laravel/template/named.conf.options containing :
+###
 ![A1](asset/Picture9.png)
 ```    
 options {
@@ -213,6 +221,7 @@ options {
 };
 ```
 Run
+###
 ![A1](asset/Picture10.png)
 ###
 Add dev.vm.local di /etc/hosts
