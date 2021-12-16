@@ -240,12 +240,16 @@ Lalu restart service bind9
 ###
 ![A1](asset/Picture15.png)
 ###
-Edit vm.local di sites available
+Edit vm.local di sites-available
 ###
 ![A1](asset/Picture16.png)
 ###
-Jangan lupa rstart nginx
-Ganti dns di control panel
+Jangan lupa restart nginx
+```
+sudo nginx -t
+sudo nginx -s reload
+```
+Ganti DNS di control panel
 ###
 ![A1](asset/Picture17.png)
 ###
