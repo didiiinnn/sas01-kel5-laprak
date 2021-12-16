@@ -241,6 +241,7 @@ Then restart the bind9 service
 ![A1](asset/Picture15.png)
 ###
 Edit vm.local di sites available
+###
 ![A1](asset/Picture16.png)
 ###
 Don't forget to restart nginx
