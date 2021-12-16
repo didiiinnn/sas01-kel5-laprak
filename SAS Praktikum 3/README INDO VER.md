@@ -17,9 +17,11 @@ sudo mkdir -p roles/laravel/handlers
 ![A1](asset/Picture1.png)
 ###
 Pada ansible buat setting-landing.yml berisi:
+###
 ![A1](asset/Picture2.png)
 ###
 Pada Laravel/tasks/main.yml isi :
+###
 ![A1](asset/Picture3.png)
 ```
 ---
@@ -81,6 +83,7 @@ Pada Laravel/tasks/main.yml isi :
     - restart bind
 ```
 Pada Laravel/handlers/main.yml berisi:
+###
 ![A1](asset/Picture4.png)
 ```
 ---
@@ -104,6 +107,7 @@ Pada Laravel/handlers/main.yml berisi:
   action: service name=bind9 state=restarted
 ```
 Pada Laravel/template/named.conf.local
+###
 ![A1](asset/Picture5.png)
 ```
 //
@@ -125,6 +129,7 @@ zone "1.168.192 .in-addr.arpa" {
 };
 ```
 Pada Laravel/template/vm.local berisi :
+###
 ![A1](asset/Picture6.png)
 ```
 ;
@@ -143,6 +148,7 @@ $TTL    604800
 dev     IN      CNAME   vm.local.
 ```
 Pada Laravel/template/ 1.168.192 .in-addr.arpa
+###
 ![A1](asset/Picture7.png) 
 ```
 ;
@@ -160,6 +166,7 @@ $TTL    604800
 100                       IN      PTR     vm.local. ; byte ke 4 IP VM
 ```
 Pada Laravel/template/resolv.conf
+###
 ![A1](asset/Picture8.png)
 ```
 # This file is managed by man:systemd-resolved(8). Do not edit.
@@ -184,6 +191,7 @@ Pada Laravel/template/resolv.conf
 nameserver 192.168.1.100 
 ```
 Pada Laravel/template/named.conf.options
+###
 ![A1](asset/Picture9.png)
 ```    
 options {
@@ -213,6 +221,7 @@ options {
 };
 ```
 Jalankan
+###
 ![A1](asset/Picture10.png)
 ###
 Tambahkan dev.vm.local di /etc/hosts
@@ -232,9 +241,12 @@ Lalu restart service bind9
 ![A1](asset/Picture15.png)
 ###
 Edit vm.local di sites available
+###
 ![A1](asset/Picture16.png)
+###
 Jangan lupa rstart nginx
 Ganti dns di control panel
+###
 ![A1](asset/Picture17.png)
 ###
 ![A1](asset/Picture18.png)
