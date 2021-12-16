@@ -1,13 +1,13 @@
-# Laporan Praktikum 3 - Sistem Administrasi Server 
-Disusun by :
+# Practical Report 3 - Server Administration System
+Arranged by :
 1. Chintya Tribhuana Utami (1202190041)
 2. Nur Wulan Maudini (1202190002)
 #
-Praktikum dilaksanakan berdasarkan keadaan yang tertera pada soal dan soal dapat diakses [Klik disini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-3/silabus.md)
+The practicum is carried out based on the conditions stated in the questions and questions can be accessed [Click here.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/blob/master/modul-3/silabus.md)
 #
-Dalam pelaksanaan mengerjakan soal-soal praktikum, kami melakukan perubahan keadaan awal dari soal-soal latihan sebelumnya dengan soal-soal praktikum yang telah diberikan kali ini.
+In the implementation of working on practical questions, we made changes to the initial state of the previous practice questions with the practical questions that have been given this time.
 #
-Masuk ke ~/ansible/modul2-ansible , kemudian membuat folder roles/laravel yang berisi tasks, template, dan handlers
+Go to ~/ansible/module2-ansible , then create a roles/laravel folder containing tasks, templates, and handlers
 ```
 cd ~/ansible/modul2-ansible
 sudo mkdir -p roles/laravel/tasks
@@ -16,10 +16,10 @@ sudo mkdir -p roles/laravel/handlers
 ```
 ![A1](asset/Picture1.png)
 ###
-Pada ansible buat setting-landing.yml berisi:
+In ansible create setting-landing.yml containing:
 ![A1](asset/Picture2.png)
 ###
-Pada Laravel/tasks/main.yml isi :
+In Laravel/tasks/main.yml containing:
 ![A1](asset/Picture3.png)
 ```
 ---
@@ -80,7 +80,7 @@ Pada Laravel/tasks/main.yml isi :
   notify:
     - restart bind
 ```
-Pada Laravel/handlers/main.yml berisi:
+In Laravel/handlers/main.yml containing:
 ![A1](asset/Picture4.png)
 ```
 ---
@@ -103,7 +103,7 @@ Pada Laravel/handlers/main.yml berisi:
   become_method: su
   action: service name=bind9 state=restarted
 ```
-Pada Laravel/template/named.conf.local
+In Laravel/template/named.conf.local containing :
 ![A1](asset/Picture5.png)
 ```
 //
@@ -124,7 +124,7 @@ zone "1.168.192 .in-addr.arpa" {
         file "/etc/bind/vm/1.168.192 .in-addr.arpa";
 };
 ```
-Pada Laravel/template/vm.local berisi :
+In Laravel/template/vm.local containing :
 ![A1](asset/Picture6.png)
 ```
 ;
@@ -142,7 +142,7 @@ $TTL    604800
 @       IN      A       192.168.1.100 
 dev     IN      CNAME   vm.local.
 ```
-Pada Laravel/template/ 1.168.192 .in-addr.arpa
+In Laravel/template/ 1.168.192 .in-addr.arpa containing :
 ![A1](asset/Picture7.png) 
 ```
 ;
@@ -159,7 +159,7 @@ $TTL    604800
 1.168.192.in-addr.arpa.  IN      NS      vm.local. ; IP VM dibalik tanpa byte ke 4
 100                       IN      PTR     vm.local. ; byte ke 4 IP VM
 ```
-Pada Laravel/template/resolv.conf
+In Laravel/template/resolv.conf containing :
 ![A1](asset/Picture8.png)
 ```
 # This file is managed by man:systemd-resolved(8). Do not edit.
@@ -183,7 +183,7 @@ Pada Laravel/template/resolv.conf
 
 nameserver 192.168.1.100 
 ```
-Pada Laravel/template/named.conf.options
+In Laravel/template/named.conf.options containing :
 ![A1](asset/Picture9.png)
 ```    
 options {
@@ -212,29 +212,35 @@ options {
         listen-on-v6 { any; };
 };
 ```
-Jalankan
+Run
 ![A1](asset/Picture10.png)
 ###
-Tambahkan dev.vm.local di /etc/hosts
+Add dev.vm.local di /etc/hosts
 ###
 ![A1](asset/Picture11.png)
 ###
 ![A1](asset/Picture12.png)
 ###
-Masuk ke /var/www/html/dev/landing pada lxc_landing, lalu edit vm.local menjadi
+Go to /var/www/html/dev/landing in lxc_landing, then edit vm.local to
 ###
 ![A1](asset/Picture13.png)
 ###
 ![A1](asset/Picture14.png)
 ###
-Lalu restart service bind9
+Then restart the bind9 service
 ###
 ![A1](asset/Picture15.png)
 ###
 Edit vm.local di sites available
 ![A1](asset/Picture16.png)
-Jangan lupa rstart nginx
-Ganti dns di control panel
+###
+Don't forget to restart nginx
+```
+sudo nginx -t
+sudo nginx -s reload
+```
+Change DNS in control panel
+###
 ![A1](asset/Picture17.png)
 ###
 ![A1](asset/Picture18.png)
