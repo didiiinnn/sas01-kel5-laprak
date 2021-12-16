@@ -1,5 +1,5 @@
 # Laporan Praktikum 3 - Sistem Administrasi Server 
-Disusun by :
+Disusun oleh :
 1. Chintya Tribhuana Utami (1202190041)
 2. Nur Wulan Maudini (1202190002)
 #
