@@ -1541,7 +1541,7 @@ Install-yii.yml
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=product',
+    'dsn' => 'mysql:host=127.0.3.200:3306;dbname=product',
     'username' => 'admin',
     'password' => 'chintya',
     'charset' => 'utf8',
