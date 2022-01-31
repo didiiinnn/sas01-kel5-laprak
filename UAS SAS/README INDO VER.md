@@ -1724,5 +1724,6 @@ Jalankan install-yii.yml, hasilnya:
    - news.kelompok5.fpsas/ : 359
    
 3. Cara mengurangi nilai througput dan meningkatkan nilai jumlah user yang dapat dilayani setiap detik untuk skema yang telah dibuat serta faktor-faktor yang mempengaruhinya :
-
- 
+- Optimasi database
+- Downgrade OS
+- Mengoptimalkan kinerja framework yang digunakan
