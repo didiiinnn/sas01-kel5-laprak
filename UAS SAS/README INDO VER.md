@@ -6,6 +6,35 @@ Disusun oleh :
 Praktikum dilaksanakan berdasarkan keadaan yang tertera pada FINAL PROJECT, dan dapat diakses [Klik disini.](https://github.com/aldonesia/Sistem-Administrasi-Server-2021/tree/master/Final%20Project)
 #
 
+Buat LXC yang terdiri dari :
+
+- 6 instance LXC ubuntu 20.04 PHP 7.4
+```
+sudo lxc-create -n lxc_php7_1 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+
+sudo lxc-create -n lxc_php7_2 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+
+sudo lxc-create -n lxc_php7_3 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+
+sudo lxc-create -n lxc_php7_4 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+
+sudo lxc-create -n lxc_php7_5 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+
+sudo lxc-create -n lxc_php7_6 -t download -- --dist ubuntu --release focal --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+```
+
+- 2 instance LXC debian 10 PHP 5.6
+```
+sudo lxc-create -n lxc_php5_1 -t download -- --dist debian --release buster --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+
+sudo lxc-create -n lxc_php5_2 -t download -- --dist debian --release buster --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+```
+
+- 1 instance LXC debian 10 mariadb server
+```
+sudo lxc-create -n lxc_mariadb -t download -- --dist debian --release buster --arch amd64 --force-cache --no-validate --server images.linuxcontainers.org
+```
+
 Setting autostart, dan IP setiap lxc, Berikut ini adalah list lxcnya
 
 ![A1](asset/Picture1.png)
@@ -1567,15 +1596,16 @@ server {
 }
 ```
 Jalankan install-yii.yml, hasilnya:
+
 ![A1](asset/Picture29.png)
 
-Jmeter 
+# Jmeter 
 
-Load Test
+## Load Testing
 
-Kelompok5.fpsas
+## kelompok5.fpsas
 
-50
+- 50
 
 ![A1](asset/Picture30.png)
 
@@ -1583,7 +1613,7 @@ Kelompok5.fpsas
 
 ![A1](asset/Picture32.png)
 
-150
+- 150
 
 ![A1](asset/Picture33.png)
 
@@ -1591,7 +1621,7 @@ Kelompok5.fpsas
 
 ![A1](asset/Picture35.png)
 
-300
+- 300
 
 ![A1](asset/Picture36.png)
 
@@ -1599,7 +1629,7 @@ Kelompok5.fpsas
 
 ![A1](asset/Picture38.png)
 
-500
+- 500
 
 ![A1](asset/Picture39.png)
 
@@ -1607,9 +1637,9 @@ Kelompok5.fpsas
 
 ![A1](asset/Picture41.png)
 
-News.kelompok5.fpsas
+## news.kelompok5.fpsas
 
-50
+- 50
 
 ![A1](asset/Picture42.png)
 
@@ -1617,7 +1647,7 @@ News.kelompok5.fpsas
 
 ![A1](asset/Picture44.png)
 
-150
+- 150
 
 ![A1](asset/Picture45.png)
 
@@ -1625,7 +1655,7 @@ News.kelompok5.fpsas
 
 ![A1](asset/Picture47.png)
 
-300
+- 300
 
 ![A1](asset/Picture48.png)
 
@@ -1633,7 +1663,7 @@ News.kelompok5.fpsas
 
 ![A1](asset/Picture50.png)
 
-500
+- 500
 
 ![A1](asset/Picture51.png)
 
@@ -1641,7 +1671,7 @@ News.kelompok5.fpsas
 
 ![A1](asset/Picture53.png)
 
-# Analisa 
+# Analisis 
 1. Nilai rata – rata Throughput untuk setiap website yang dihasilkan dari load testing
 
 - 50 user
